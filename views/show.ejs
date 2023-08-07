@@ -1,0 +1,46 @@
+<!-- views/flights/show.ejs -->
+<h1>Flight Details</h1>
+
+<h2>Tickets for this Flight</h2>
+<ul>
+  <% tickets.forEach((ticket) => { %>
+    <li>
+      Seat: <%= ticket.seat %>
+      Price: <%= ticket.price %>
+    </li>
+  <% }); %>
+</ul>
+
+<a href="/flights/<%= flight._id %>/tickets/new">New Ticket</a>
+
+<p>Airline: <%= flight.airline %></p>
+<p>Flight No: <%= flight.flightNo %></p>
+<p>Departure Airport: <%= flight.airport %></p>
+<p>Departure Date/Time: <%= flight.departs %></p>
+
+<h2>Destinations</h2>
+<ul>
+  <% flight.destinations.forEach((destination) => { %>
+    <li>
+      Airport: <%= destination.airport %>
+      Arrival Date/Time: <%= destination.arrival %>
+    </li>
+  <% }); %>
+</ul>
+
+<h2>Add a Destination</h2>
+<form action="/flights/<%= flight._id %>/destinations" method="post">
+  <label for="airport">Airport:</label>
+  <select name="airport" id="airport">
+    <option value="AUS">AUS</option>
+    <option value="DFW">DFW</option>
+    <option value="DEN">DEN</option>
+    <option value="LAX">LAX</option>
+    <option value="SAN">SAN</option>
+  </select>
+
+  <label for="arrival">Arrival Date/Time:</label>
+  <input type="datetime-local" name="arrival" id="arrival" required>
+
+  <button type="submit">Add Destination</button>
+</form>
